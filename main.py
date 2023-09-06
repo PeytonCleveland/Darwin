@@ -43,7 +43,7 @@ def should_prune(evolved_prompt, parent):
     response = get_response(comparison_prompt)
 
     # Prune if the model deems them equal
-    if response.strip() == "Equal":
+    if response and response.strip() == "Equal":
         return True
     
     return False
