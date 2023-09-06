@@ -28,6 +28,9 @@ class Node:
 def should_prune(evolved_prompt, parent):
     """Evaluate the fitness of a potential child node based on its evolved prompt"""
 
+    if evolved_prompt == None:
+        return True
+
     # Redundancy check
     if evolved_prompt.strip() == parent.user_prompt.strip():
         return True
@@ -95,8 +98,14 @@ def validate_csv_format(filename):
     return True
 
 def get_response(prompt_text):
-    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt_text}], temperature=0.8)
-    return response.choices[0].message.content
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt_text}], temperature=0.8
+        )
+        return response.choices[0].message.content
+    except openai.error.OpenAIError as e:
+        print(f"Error occurred while fetching response from OpenAI: {e}. Skipping this prompt.")
+        return None  # return None to indicate a failed request
 
 def evolve(node):
     """Evolve the current node, return node to add as a new root node"""
