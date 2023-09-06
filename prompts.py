@@ -27,8 +27,8 @@ DEPTH_EVOLUTION_PROMPTS=[
     """I want you act as a Prompt Rewriter. Your objective is to rewrite a given prompt into a more complex version
     to train future language models on realistic, complext tasks. The rewritten prompt must be reasonable, must sound
     like it's written by a curious user and must be understandable. Do not simply reword the existing prompt. Rather,
-    add depth by introducing more layers or aspects to the subject Your rewriting cannot omit the non-text parts such
-    as any table or code in #Given Prompt#:. You SHOULD complicate the given prompt using the following method: If
+    add depth by introducing more layers or aspects to the subject Your rewriting cannot omit any table or code in
+    #Given Prompt#, they must be retained. You SHOULD complicate the given prompt using the following method: If
     #Given Prompt# contains inquiries about certain issues, the depth and breadth of the inquiry can be increased.
     ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear in #Rewritten Prompt#, only respond with the
     rewritten prompt.
@@ -39,10 +39,11 @@ DEPTH_EVOLUTION_PROMPTS=[
     # 2. Concretizing
     """I want you act as a Prompt Rewriter. Your objective is to rewrite a given prompt into a more complex version
     to train future language models on realistic, complex tasks. The rewritten prompt must be reasonable, must sound
-    like it's written by a curious user and must be understandable. Your rewriting cannot omit the non-text parts such
-    as any table or code in #Given Prompt#:. You SHOULD complicate the given prompt using the following method: Please
-    replace general concepts with more specific concepts. ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear
-    in #Rewritten Prompt#, only respond with the rewritten prompt.
+    like it's written by a curious user and must be understandable. Do not simply reword the existing prompt. Rather,
+    add depth by making the prompt more specific. Your rewriting cannot omit any table or code in #Given Prompt#, they
+    must be retained. You SHOULD complicate the given prompt using the following method: Please replace general concepts
+    with more specific concepts. ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear in #Rewritten Prompt#,
+    only respond with the rewritten prompt.
     #Given Prompt#:
     {prompt}
     #Rewritten Prompt#:""",
@@ -50,20 +51,22 @@ DEPTH_EVOLUTION_PROMPTS=[
     # 3. Increasing Reasoning
     """I want you to act as a Prompt Rewriter. Your objective is to rewrite a given prompt to require more detailed reasoning 
     and thoughtful answers from future language models. The rewritten prompt must be reasonable, must sound like it's written
-    by a curious user and must be understandable. Your rewriting cannot omit the non-text parts such as any table or code in
-    #Given Prompt#. You SHOULD complicate the given prompt by asking for more in-depth reasoning or requiring multiple steps
-    of thought. ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear in #Rewritten Prompt#, only respond with the
-    rewritten prompt.
+    by a curious user and must be understandable. Do not simply reword the existing prompt. Rather, add depth by asking for
+    more in-depth reaasoning or requiring multiple steps of thought. Your rewriting cannot omit any table or code in 
+    #Given Prompt#, they must be retained. You SHOULD complicate the given prompt by asking for more in-depth reasoning or
+    requiring multiple steps of thought. ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear in #Rewritten Prompt#,
+    only respond with the rewritten prompt.
     #Given Prompt#:
     {prompt}
     #Rewritten Prompt#:""",
     
     # 4. Complicating Input
     """I want you to act as a Prompt Rewriter. Imagine you are crafting a question that demands more intellectual engagement.
-    The rewritten prompt must be reasonable, must sound like it's written by a curious user, and be understandable. Your
-    rewriting cannot omit the non-text parts such as any table or code in #Given Prompt#. You SHOULD complicate the given
-    prompt by asking for more in-depth reasoning or requiring multiple steps of thought. ‘given prompt’ and ‘rewritten prompt’
-    are not allowed to appear in #Rewritten Prompt#. Only respond with the rewritten prompt.
+    The rewritten prompt must be reasonable, must sound like it's written by a curious user, and be understandable. Do not simply
+    reword the existing prompt. Rather, add depth by complicating the input and adding new complexities and constraints. Your
+    rewriting cannot omit any table or code in #Given Prompt#, they must be retained. You SHOULD complicate the given prompt by
+    adding new complexities and constraints. ‘given prompt’ and ‘rewritten prompt’ are not allowed to appear in #Rewritten Prompt#.
+    Only respond with the rewritten prompt.
     #Given Prompt#:
     {prompt}
     #Rewritten Prompt#:"""
