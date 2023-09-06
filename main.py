@@ -165,6 +165,23 @@ def forest_stats(forest):
 
     return trees, nodes
 
+def save_forest_to_csv(forest, output_filename):
+    """
+    Save the forest to a given CSV file.
+    """
+    with open(output_filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Refusal", "System", "User", "Assistant"])  # Write header
+        
+        for node in forest:
+            # We will recursively traverse each tree to save each node
+            def write_node(node):
+                writer.writerow([node.is_refusal, node.system_prompt, node.user_prompt, node.assistant_response])
+                for child in node.children:
+                    write_node(child)
+            
+            write_node(node)
+
 def main():
     parser = argparse.ArgumentParser(description='Evolve prompts using GPT-4 based on a CSV input.')
     parser.add_argument('csv_file', type=str, help='Path to the CSV file containing the prompts to evolve.')
@@ -216,6 +233,9 @@ def main():
         print(f"\nTotal Trees in Forest: {trees}, Total Nodes in Forest: {nodes}")
         print(f"Leaves Added in Epoch {epoch+1}: {leaves_added}")
         print(f"Root Nodes Added in Epoch {epoch+1}: {root_nodes_added}")
+
+        save_forest_to_csv(forest, args.output_file)
+        print(f"Results saved to {args.output_file} after epoch {epoch + 1}")
 
 
 
