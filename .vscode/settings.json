@@ -1,0 +1,6 @@
+{
+    "editor.acceptSuggestionOnEnter": "on",
+    "VSCodeNotion.accessToken": "secret_QBsR3rxLWmjE7WvT10irGgKJrVGGd5QemMCd0cKeWQN",
+    "VSCodeNotion.allowEmbeds": true,
+    "VSCodeNotion.api": "https://api.notion.com"
+}
